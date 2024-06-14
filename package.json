@@ -10,6 +10,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
+    "atlas": "^1.0.0-alpha.0",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
@@ -19,6 +20,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "jsonwebtoken": "^9.0.2",
+    "mongo": "^0.1.0",
     "mongoose": "^6.1.5",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
