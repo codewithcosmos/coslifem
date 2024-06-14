@@ -1,26 +1,18 @@
+// routes/auth.js
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
-const User = require('../models/User');
+const User = require('../models/User'); // Correctly import the User model
 
-// Register route
-router.post('/register', (req, res) => {
-  const { username, password } = req.body;
-  const newUser = new User({ username, password });
-  newUser.save()
-    .then(() => res.json({ success: true }))
-    .catch(err => res.status(500).json({ success: false, message: err.message }));
-});
-
-// Login route
-router.post('/login', passport.authenticate('local'), (req, res) => {
-  res.json({ success: true, message: 'Login successful' });
-});
-
-// Logout route
-router.get('/logout', (req, res) => {
-  req.logout();
-  res.json({ success: true, message: 'Logout successful' });
+// Example route for user registration
+router.post('/register', async (req, res) => {
+  const { username, password, email } = req.body;
+  try {
+    const newUser = new User({ username, password, email });
+    await newUser.save();
+    res.status(201).json(newUser);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
 module.exports = router;
