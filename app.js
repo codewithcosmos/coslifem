@@ -1,17 +1,26 @@
-// app.js
 const express = require('express');
-const mongoose = require('mongoose');
-const connectDB = require('./db'); // Import the connectDB function from db.js
+const connectDB = require('./config/database');
+const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
+const quoteRoutes = require('./routes/quoteRoutes');
+const invoiceRoutes = require('./routes/invoiceRoutes');
 
 const app = express();
 
-// Call connectDB to establish MongoDB connection
-connectDB()
-  .then(() => {
-    app.listen(5000, () => {
-      console.log('Server running on port 5000');
-    });
-  })
-  .catch((err) => {
-    console.error('Failed to connect to MongoDB:', err);
-  });
+// Connect to MongoDB
+connectDB();
+
+// Middleware
+app.use(express.json());
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/quotes', quoteRoutes);
+app.use('/api/invoices', invoiceRoutes);
+
+// Error handling middleware
+app.use(require('./middlewares/errorMiddleware'));
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
