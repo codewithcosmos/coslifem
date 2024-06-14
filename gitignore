@@ -1,0 +1,10 @@
+# Dependency directories
+/node_modules
+/frontend/client/node_modules
+
+# Environment variables
+.env
+
+# Build files
+/build
+/frontend/client/build
