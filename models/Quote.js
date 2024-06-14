@@ -1,18 +1,25 @@
-// models/Quote.js
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
 
-const quoteSchema = new Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  products: [
+const quoteSchema = new mongoose.Schema({
+  clientName: {
+    type: String,
+    required: true,
+  },
+  clientAddress: {
+    type: String,
+    required: true,
+  },
+  items: [
     {
-      productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
-      quantity: { type: Number, required: true },
+      name: String,
+      quantity: Number,
+      price: Number,
     },
   ],
-  totalPrice: { type: Number, required: true },
-  status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
-}, { timestamps: true });
+  totalAmount: {
+    type: Number,
+    required: true,
+  },
+});
 
-const Quote = mongoose.model('Quote', quoteSchema);
-module.exports = Quote;
+module.exports = mongoose.model('Quote', quoteSchema);

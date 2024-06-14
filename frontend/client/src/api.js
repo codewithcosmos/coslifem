@@ -1,29 +1,12 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://your-api-base-url.com'; // Replace with your actual API base URL
+const API_URL = 'http://localhost:3000/api';
 
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-  },
-});
+export const fetchProducts = () => axios.get(`${API_URL}/products`);
+export const createProduct = (product) => axios.post(`${API_URL}/products`, product);
 
-// API functions for login, signup, getUserProfile, getProducts, getCartItems, getQuotes, getInvoices, etc.
+export const fetchQuotes = () => axios.get(`${API_URL}/quotes`);
+export const createQuote = (quote) => axios.post(`${API_URL}/quotes`, quote);
 
-export const loginUser = async (email, password) => {
-  return await api.post('/login', { email, password });
-};
-
-export const signupUser = async (name, email, password) => {
-  return await api.post('/signup', { name, email, password });
-};
-
-export const getUserProfile = async () => {
-  return await api.get('/profile');
-};
-
-// Other API functions here...
-
-export default api;
+export const fetchInvoices = () => axios.get(`${API_URL}/invoices`);
+export const createInvoice = (invoice) => axios.post(`${API_URL}/invoices`, invoice);

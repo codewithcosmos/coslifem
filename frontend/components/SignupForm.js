@@ -1,31 +1,25 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const SignupForm = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('/api/auth/signup', { username, password });
-      console.log('Signup successful:', response.data);
-    } catch (error) {
-      console.error('Signup error:', error);
-    }
+    // Handle signup logic here
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>Username:</label>
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+        <label>Email:</label>
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
       </div>
       <div>
         <label>Password:</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
       </div>
-      <button type="submit">Signup</button>
+      <button type="submit">Sign Up</button>
     </form>
   );
 };

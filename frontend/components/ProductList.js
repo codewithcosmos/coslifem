@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const ProductList = () => {
@@ -6,12 +6,8 @@ const ProductList = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      try {
-        const response = await axios.get('/api/products');
-        setProducts(response.data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
+      const res = await axios.get('/api/products');
+      setProducts(res.data);
     };
     fetchProducts();
   }, []);
@@ -20,8 +16,10 @@ const ProductList = () => {
     <div>
       <h1>Product List</h1>
       <ul>
-        {products.map(product => (
-          <li key={product._id}>{product.name}</li>
+        {products.map((product) => (
+          <li key={product._id}>
+            {product.name} - ${product.price}
+          </li>
         ))}
       </ul>
     </div>
