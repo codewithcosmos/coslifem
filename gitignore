@@ -5,5 +5,3 @@
 # Environment variables
 .env
 
-# Build files
-node-modules
